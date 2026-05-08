@@ -37,7 +37,7 @@ export const Input = styled.input<{ $hasError?: boolean }>`
     outline: none;
     border-color: ${({ theme, $hasError }) => 
       $hasError ? theme.colors.error.main : theme.colors.secondary[500]};
-    box-shadow: 0 0 0 3px ${({ theme, $hasError }) => 
+    box-shadow: 0 0 0 3px ${({ $hasError }) => 
       $hasError ? 'rgba(239, 68, 68, 0.2)' : 'rgba(212, 168, 67, 0.2)'};
   }
   
@@ -69,7 +69,7 @@ export const TextArea = styled.textarea<{ $hasError?: boolean }>`
     outline: none;
     border-color: ${({ theme, $hasError }) => 
       $hasError ? theme.colors.error.main : theme.colors.secondary[500]};
-    box-shadow: 0 0 0 3px ${({ theme, $hasError }) => 
+    box-shadow: 0 0 0 3px ${({ $hasError }) => 
       $hasError ? 'rgba(239, 68, 68, 0.2)' : 'rgba(212, 168, 67, 0.2)'};
   }
 `;

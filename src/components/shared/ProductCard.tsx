@@ -132,7 +132,6 @@ const OutOfStock = styled.div`
 `;
 
 export function ProductCard({
-  id,
   slug,
   name,
   brand,
