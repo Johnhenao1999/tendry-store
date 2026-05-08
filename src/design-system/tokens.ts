@@ -158,10 +158,32 @@ export const shadows = {
 } as const;
 
 export const transitions = {
+  // Duraciones
+  duration: {
+    instant: '100ms',
+    fast: '150ms',
+    normal: '300ms',
+    slow: '500ms',
+    slower: '700ms',
+  },
+  // Easings
+  easing: {
+    linear: 'linear',
+    ease: 'ease',
+    easeIn: 'ease-in',
+    easeOut: 'ease-out',
+    easeInOut: 'ease-in-out',
+    spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  // Presets combinados
   fast: '150ms ease',
   normal: '300ms ease',
   slow: '500ms ease',
   spring: '300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+  bounce: '400ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+  smooth: '300ms cubic-bezier(0.4, 0, 0.2, 1)',
 } as const;
 
 export const zIndex = {

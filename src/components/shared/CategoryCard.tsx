@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ArrowRight } from 'lucide-react';
 
 interface CategoryCardProps {
@@ -10,6 +10,11 @@ interface CategoryCardProps {
   productCount: number;
 }
 
+const shimmer = keyframes`
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+`;
+
 const CategoryCardWrapper = styled(Link)`
   position: relative;
   display: block;
@@ -17,14 +22,21 @@ const CategoryCardWrapper = styled(Link)`
   overflow: hidden;
   aspect-ratio: 3/4;
   text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.4s ease;
   
   &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    
     .category-image {
       transform: scale(1.1);
     }
     
     .category-arrow {
-      transform: translateX(4px);
+      transform: translateX(8px);
+      background: ${({ theme }) => theme.colors.secondary[500]};
+      color: ${({ theme }) => theme.colors.primary[900]};
     }
     
     .category-overlay {
@@ -35,7 +47,32 @@ const CategoryCardWrapper = styled(Link)`
         rgba(10, 18, 25, 0.3) 100%
       );
     }
+    
+    .category-name {
+      color: ${({ theme }) => theme.colors.secondary[400]};
+    }
+    
+    .shine-effect {
+      left: 100%;
+    }
   }
+`;
+
+const ShineEffect = styled.div`
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+  z-index: 2;
+  pointer-events: none;
 `;
 
 const CategoryImage = styled.div`
@@ -46,7 +83,7 @@ const CategoryImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform ${({ theme }) => theme.transitions.slow};
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 `;
 
@@ -59,7 +96,7 @@ const CategoryOverlay = styled.div`
     rgba(10, 18, 25, 0.5) 50%,
     rgba(10, 18, 25, 0.1) 100%
   );
-  transition: background ${({ theme }) => theme.transitions.normal};
+  transition: background 0.4s ease;
 `;
 
 const CategoryContent = styled.div`
@@ -76,6 +113,7 @@ const CategoryName = styled.h3`
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   color: ${({ theme }) => theme.colors.neutral.white};
   margin-bottom: ${({ theme }) => theme.spacing[2]};
+  transition: color 0.3s ease;
 `;
 
 const CategoryDescription = styled.p`
@@ -99,14 +137,23 @@ const ProductCount = styled.span`
   color: ${({ theme }) => theme.colors.secondary[500]};
 `;
 
-const ArrowIcon = styled(ArrowRight)`
+const ArrowButton = styled.div`
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 168, 67, 0.2);
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   color: ${({ theme }) => theme.colors.secondary[500]};
-  transition: transform ${({ theme }) => theme.transitions.fast};
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 `;
 
 export function CategoryCard({ id, name, description, image, productCount }: CategoryCardProps) {
   return (
     <CategoryCardWrapper to={`/categorias/${id}`}>
+      <ShineEffect className="shine-effect" />
+      
       <CategoryImage className="category-image">
         <img src={image} alt={name} loading="lazy" />
       </CategoryImage>
@@ -114,11 +161,13 @@ export function CategoryCard({ id, name, description, image, productCount }: Cat
       <CategoryOverlay className="category-overlay" />
       
       <CategoryContent>
-        <CategoryName>{name}</CategoryName>
+        <CategoryName className="category-name">{name}</CategoryName>
         <CategoryDescription>{description}</CategoryDescription>
         <CategoryFooter>
           <ProductCount>{productCount} productos</ProductCount>
-          <ArrowIcon className="category-arrow" size={20} />
+          <ArrowButton className="category-arrow">
+            <ArrowRight size={18} />
+          </ArrowButton>
         </CategoryFooter>
       </CategoryContent>
     </CategoryCardWrapper>

@@ -1,9 +1,50 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ArrowRight, Sparkles, Truck, Shield, Headphones, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Section, Button, Heading, Text, Grid, GradientText } from '../../components/ui';
-import { ProductCard, CategoryCard } from '../../components/shared';
+import { ProductCard, CategoryCard, AnimatedSection } from '../../components/shared';
 import { useFeaturedProducts, useCategories } from '../../hooks/useProducts';
+
+// Animations
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+`;
+
+const glow = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 168, 67, 0.4);
+  }
+`;
 
 // Hero Section
 const HeroSection = styled.section`
@@ -49,6 +90,7 @@ const HeroSubtitle = styled(Text)`
   border: 1px solid rgba(212, 168, 67, 0.3);
   border-radius: ${({ theme }) => theme.borderRadius.full};
   margin-bottom: ${({ theme }) => theme.spacing[6]};
+  animation: ${fadeInUp} 0.6s ease-out 0.2s backwards;
   
   svg {
     color: ${({ theme }) => theme.colors.secondary[500]};
@@ -59,18 +101,21 @@ const HeroTitle = styled(Heading)`
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: ${({ theme }) => theme.spacing[6]};
   line-height: 1.1;
+  animation: ${fadeInUp} 0.6s ease-out 0.4s backwards;
 `;
 
 const HeroDescription = styled(Text)`
   font-size: ${({ theme }) => theme.typography.fontSize.lg};
   margin-bottom: ${({ theme }) => theme.spacing[8]};
   max-width: 500px;
+  animation: ${fadeInUp} 0.6s ease-out 0.6s backwards;
 `;
 
 const HeroButtons = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing[4]};
   flex-wrap: wrap;
+  animation: ${fadeInUp} 0.6s ease-out 0.8s backwards;
 `;
 
 const HeroImage = styled.div`
@@ -80,6 +125,7 @@ const HeroImage = styled.div`
   width: 45%;
   max-width: 500px;
   z-index: 0;
+  animation: ${fadeInRight} 0.8s ease-out 0.5s backwards;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
@@ -89,6 +135,7 @@ const HeroImage = styled.div`
     width: 100%;
     height: auto;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    animation: ${float} 4s ease-in-out infinite;
   }
 `;
 
@@ -103,7 +150,7 @@ const FeatureGrid = styled.div`
   gap: ${({ theme }) => theme.spacing[6]};
 `;
 
-const FeatureCard = styled.div`
+const FeatureCard = styled.div<{ $delay?: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,11 +159,12 @@ const FeatureCard = styled.div`
   background: ${({ theme }) => theme.colors.primary[800]};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   border: 1px solid ${({ theme }) => theme.colors.primary[600]};
-  transition: all ${({ theme }) => theme.transitions.normal};
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   
   &:hover {
     border-color: ${({ theme }) => theme.colors.secondary[500]};
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -129,6 +177,12 @@ const FeatureIcon = styled.div`
   background: linear-gradient(135deg, ${({ theme }) => theme.colors.secondary[600]} 0%, ${({ theme }) => theme.colors.secondary[500]} 100%);
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   margin-bottom: ${({ theme }) => theme.spacing[4]};
+  transition: all 0.3s ease;
+  
+  ${FeatureCard}:hover & {
+    transform: scale(1.1) rotate(5deg);
+    animation: ${glow} 1.5s ease-in-out infinite;
+  }
   
   svg {
     color: ${({ theme }) => theme.colors.primary[900]};
@@ -158,9 +212,34 @@ const ViewAllLink = styled(Link)`
   color: ${({ theme }) => theme.colors.secondary[500]};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   margin-top: ${({ theme }) => theme.spacing[8]};
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: ${({ theme }) => theme.colors.secondary[500]};
+    transition: width 0.3s ease;
+  }
   
   &:hover {
     gap: ${({ theme }) => theme.spacing[3]};
+    
+    &::after {
+      width: 100%;
+    }
+    
+    svg {
+      transform: translateX(4px);
+    }
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
   }
 `;
 
@@ -253,11 +332,13 @@ export function HomePage() {
         <Container>
           <FeatureGrid>
             {features.map((feature, index) => (
-              <FeatureCard key={index}>
-                <FeatureIcon>{feature.icon}</FeatureIcon>
-                <FeatureTitle $color="white">{feature.title}</FeatureTitle>
-                <Text $size="sm" $color="muted">{feature.description}</Text>
-              </FeatureCard>
+              <AnimatedSection key={index} animation="fadeInUp" delay={index * 0.1}>
+                <FeatureCard>
+                  <FeatureIcon>{feature.icon}</FeatureIcon>
+                  <FeatureTitle $color="white">{feature.title}</FeatureTitle>
+                  <Text $size="sm" $color="muted">{feature.description}</Text>
+                </FeatureCard>
+              </AnimatedSection>
             ))}
           </FeatureGrid>
         </Container>
@@ -266,14 +347,16 @@ export function HomePage() {
       {/* Categories Section */}
       <Section $padding="lg">
         <Container>
-          <SectionHeader>
-            <SectionTitle as="h2" $size="4xl">
-              Nuestras <GradientText>Categorías</GradientText>
-            </SectionTitle>
-            <Text $color="secondary" $size="lg">
-              Encuentra exactamente lo que buscas en nuestra variedad de colecciones
-            </Text>
-          </SectionHeader>
+          <AnimatedSection animation="fadeInUp">
+            <SectionHeader>
+              <SectionTitle as="h2" $size="4xl">
+                Nuestras <GradientText>Categorías</GradientText>
+              </SectionTitle>
+              <Text $color="secondary" $size="lg">
+                Encuentra exactamente lo que buscas en nuestra variedad de colecciones
+              </Text>
+            </SectionHeader>
+          </AnimatedSection>
           
           {loadingCategories ? (
             <LoadingWrapper>
@@ -281,39 +364,44 @@ export function HomePage() {
             </LoadingWrapper>
           ) : (
             <Grid $minChildWidth="280px" $gap={6}>
-              {categories.slice(0, 4).map((category) => (
-                <CategoryCard
-                  key={category._id}
-                  id={category.slug}
-                  name={category.name}
-                  description={category.description}
-                  image={category.image}
-                  productCount={category.productCount || 0}
-                />
+              {categories.slice(0, 4).map((category, index) => (
+                <AnimatedSection key={category._id} animation="fadeInUp" delay={index * 0.1}>
+                  <CategoryCard
+                    id={category.slug}
+                    name={category.name}
+                    description={category.description}
+                    image={category.image}
+                    productCount={category.productCount || 0}
+                  />
+                </AnimatedSection>
               ))}
             </Grid>
           )}
           
-          <div style={{ textAlign: 'center' }}>
-            <ViewAllLink to="/categorias">
-              Ver todas las categorías
-              <ArrowRight size={18} />
-            </ViewAllLink>
-          </div>
+          <AnimatedSection animation="fadeIn" delay={0.4}>
+            <div style={{ textAlign: 'center' }}>
+              <ViewAllLink to="/categorias">
+                Ver todas las categorías
+                <ArrowRight size={18} />
+              </ViewAllLink>
+            </div>
+          </AnimatedSection>
         </Container>
       </Section>
 
       {/* Featured Products Section */}
       <Section $padding="lg" style={{ background: 'rgba(15, 28, 46, 0.5)' }}>
         <Container>
-          <SectionHeader>
-            <SectionTitle as="h2" $size="4xl">
-              Productos <GradientText>Destacados</GradientText>
-            </SectionTitle>
-            <Text $color="secondary" $size="lg">
-              Los más vendidos y las mejores ofertas de la temporada
-            </Text>
-          </SectionHeader>
+          <AnimatedSection animation="fadeInUp">
+            <SectionHeader>
+              <SectionTitle as="h2" $size="4xl">
+                Productos <GradientText>Destacados</GradientText>
+              </SectionTitle>
+              <Text $color="secondary" $size="lg">
+                Los más vendidos y las mejores ofertas de la temporada
+              </Text>
+            </SectionHeader>
+          </AnimatedSection>
           
           {loadingProducts ? (
             <LoadingWrapper>
@@ -321,32 +409,35 @@ export function HomePage() {
             </LoadingWrapper>
           ) : (
             <Grid $minChildWidth="260px" $gap={6}>
-              {featuredProducts.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  id={product._id}
-                  slug={product.slug}
-                  name={product.name}
-                  brand={product.brand || ''}
-                  price={product.price}
-                  originalPrice={product.compareAtPrice}
-                  image={product.images[0] || 'https://via.placeholder.com/300'}
-                  category={product.category?.name || ''}
-                  inStock={product.stock > 0}
-                  isNew={new Date(product.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)}
-                  onAddToCart={() => console.log('Add to cart:', product._id)}
-                  onAddToWishlist={() => console.log('Add to wishlist:', product._id)}
-                />
+              {featuredProducts.map((product, index) => (
+                <AnimatedSection key={product._id} animation="fadeInUp" delay={index * 0.08}>
+                  <ProductCard
+                    id={product._id}
+                    slug={product.slug}
+                    name={product.name}
+                    brand={product.brand || ''}
+                    price={product.price}
+                    originalPrice={product.compareAtPrice}
+                    image={product.images[0] || 'https://via.placeholder.com/300'}
+                    category={product.category?.name || ''}
+                    inStock={product.stock > 0}
+                    isNew={new Date(product.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)}
+                    onAddToCart={() => console.log('Add to cart:', product._id)}
+                    onAddToWishlist={() => console.log('Add to wishlist:', product._id)}
+                  />
+                </AnimatedSection>
               ))}
             </Grid>
           )}
           
-          <div style={{ textAlign: 'center' }}>
-            <ViewAllLink to="/productos">
-              Ver todos los productos
-              <ArrowRight size={18} />
-            </ViewAllLink>
-          </div>
+          <AnimatedSection animation="fadeIn" delay={0.5}>
+            <div style={{ textAlign: 'center' }}>
+              <ViewAllLink to="/productos">
+                Ver todos los productos
+                <ArrowRight size={18} />
+              </ViewAllLink>
+            </div>
+          </AnimatedSection>
         </Container>
       </Section>
 

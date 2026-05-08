@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { fadeIn, fadeInUp, fadeInDown, fadeInLeft, fadeInRight, scaleIn, shimmer } from './animations';
 
 export const GlobalStyles = createGlobalStyle`
   /* CSS Reset */
@@ -145,5 +146,70 @@ export const GlobalStyles = createGlobalStyle`
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+
+  /* Animation Utility Classes */
+  .animate-fade-in {
+    animation: ${fadeIn} 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: ${fadeInUp} 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-down {
+    animation: ${fadeInDown} 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: ${fadeInLeft} 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-right {
+    animation: ${fadeInRight} 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: ${scaleIn} 0.4s ease-out forwards;
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+
+  /* Skeleton loading shimmer */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      ${({ theme }) => theme.colors.primary[700]} 0%,
+      ${({ theme }) => theme.colors.primary[600]} 50%,
+      ${({ theme }) => theme.colors.primary[700]} 100%
+    );
+    background-size: 200% 100%;
+    animation: ${shimmer} 1.5s infinite;
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+  }
+
+  /* Page transition wrapper */
+  .page-transition {
+    animation: ${fadeInUp} 0.4s ease-out forwards;
+  }
+
+  /* Smooth hover transitions for interactive elements */
+  a, button, input, select, textarea {
+    transition: all ${({ theme }) => theme.transitions.fast};
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 `;
