@@ -41,11 +41,6 @@ const scaleIn = keyframes`
   }
 `;
 
-const shimmer = keyframes`
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-`;
-
 const ProductCardWrapper = styled(Card)`
   position: relative;
   overflow: hidden;

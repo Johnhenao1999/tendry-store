@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { ArrowRight } from 'lucide-react';
 
 interface CategoryCardProps {
@@ -9,11 +9,6 @@ interface CategoryCardProps {
   image: string;
   productCount: number;
 }
-
-const shimmer = keyframes`
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-`;
 
 const CategoryCardWrapper = styled(Link)`
   position: relative;

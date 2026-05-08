@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, ReactNode } from 'react';
+import React, { useEffect, useRef, useState, type ReactNode } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 // Animation keyframes
@@ -116,7 +116,7 @@ interface AnimatedSectionProps {
   threshold?: number;
   triggerOnce?: boolean;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
 }
 
 export function AnimatedSection({

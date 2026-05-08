@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -8,12 +8,6 @@ interface ButtonProps {
   $size?: ButtonSize;
   $fullWidth?: boolean;
 }
-
-// Shimmer animation for primary button hover
-const shimmerEffect = keyframes`
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-`;
 
 const variants = {
   primary: css`
