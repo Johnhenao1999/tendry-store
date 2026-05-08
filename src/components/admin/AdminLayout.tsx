@@ -13,6 +13,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import logoTendry from '../../assets/images/logo-tendry.jpeg';
 
 const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -37,7 +38,9 @@ const AdminLayout: React.FC = () => {
       <Sidebar $isOpen={sidebarOpen}>
         <SidebarHeader>
           <Logo>
-            <LogoIcon>T</LogoIcon>
+            <LogoIcon>
+              <img src={logoTendry} alt="Tendry Logo" />
+            </LogoIcon>
             {sidebarOpen && <LogoText>TENDRYX</LogoText>}
           </Logo>
         </SidebarHeader>
@@ -139,15 +142,18 @@ const Logo = styled.div`
 const LogoIcon = styled.div`
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.secondary[600]}, ${({ theme }) => theme.colors.secondary[400]});
   border-radius: 10px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary[800]};
   flex-shrink: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const LogoText = styled.span`

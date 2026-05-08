@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Search, ShoppingCart, Menu, X, User } from 'lucide-react';
 import { Container, IconButton, CountBadge } from '../ui';
+import logoTendry from '../../assets/images/logo-tendry.jpeg';
 
 const HeaderWrapper = styled.header`
   position: sticky;
@@ -43,18 +44,19 @@ const Logo = styled(Link)`
 `;
 
 const LogoIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.secondary[500]} 0%,
-    ${({ theme }) => theme.colors.secondary[700]} 100%
-  );
+  width: 65px;
+  height: 60px;
   border-radius: ${({ theme }) => theme.borderRadius.md};
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
@@ -200,8 +202,9 @@ export function Header() {
       <Container>
         <HeaderContent>
           <Logo to="/">
-            <LogoIcon>🧴</LogoIcon>
-            <span>TENDRYX</span>
+            <LogoIcon>
+              <img src={logoTendry} alt="Tendry Logo" />
+            </LogoIcon>
           </Logo>
 
           <Nav $isOpen={isMenuOpen}>

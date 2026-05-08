@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Container, Text, Heading } from '../ui';
+import logoTendry from '../../assets/images/logo-tendry.jpeg';
 
 // Custom social icons (lucide-react doesn't include brand icons)
 const FacebookIcon = () => (
@@ -64,6 +65,13 @@ const Logo = styled(Link)`
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+`;
+
+const LogoImage = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  object-fit: cover;
 `;
 
 const SocialLinks = styled.div`
@@ -141,7 +149,7 @@ export function Footer() {
         <FooterContent>
           <BrandSection>
             <Logo to="/">
-              🧴 <span>TENDRYX</span>
+              <LogoImage src={logoTendry} alt="Tendry Logo" />
             </Logo>
             <Text $size="sm" $color="secondary">
               Tu destino premium para fragancias exclusivas. Descubre nuestra colección de 
