@@ -5,6 +5,7 @@ import { Grid as GridIcon, List, Search, Loader2, ChevronLeft, ChevronRight } fr
 import { Container, Section, Heading, Text, Grid, GradientText, Tag } from '../../components/ui';
 import { ProductCard } from '../../components/shared';
 import { useProducts, useCategories } from '../../hooks/useProducts';
+import { useCart } from '../../context/CartContext';
 
 const PageHeader = styled.div`
   text-align: center;
@@ -169,6 +170,7 @@ const PageButton = styled.button<{ $active?: boolean }>`
 
 export function ProductsPage() {
   const { categoryId } = useParams();
+  const { addItem } = useCart();
   
   const [selectedCategory, setSelectedCategory] = useState(categoryId || '');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -322,7 +324,13 @@ export function ProductsPage() {
                     category={product.category?.name || ''}
                     inStock={product.stock > 0}
                     isNew={new Date(product.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)}
-                    onAddToCart={() => console.log('Add to cart:', product._id)}
+                    onAddToCart={() => addItem({
+                      productId: product._id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.images[0] || '',
+                      stock: product.stock,
+                    })}
                     onAddToWishlist={() => console.log('Add to wishlist:', product._id)}
                   />
                 ))}

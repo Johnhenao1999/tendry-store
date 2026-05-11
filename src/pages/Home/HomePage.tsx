@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Section, Button, Heading, Text, Grid, GradientText } from '../../components/ui';
 import { ProductCard, CategoryCard, AnimatedSection } from '../../components/shared';
 import { useFeaturedProducts, useCategories } from '../../hooks/useProducts';
+import { useCart } from '../../context/CartContext';
 
 // Animations
 const fadeInUp = keyframes`
@@ -284,6 +285,7 @@ const features = [
 ];
 
 export function HomePage() {
+  const { addItem } = useCart();
   const { categories, loading: loadingCategories } = useCategories();
   const { products: featuredProducts, loading: loadingProducts } = useFeaturedProducts();
 
@@ -422,7 +424,13 @@ export function HomePage() {
                     category={product.category?.name || ''}
                     inStock={product.stock > 0}
                     isNew={new Date(product.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)}
-                    onAddToCart={() => console.log('Add to cart:', product._id)}
+                    onAddToCart={() => addItem({
+                      productId: product._id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.images[0] || '',
+                      stock: product.stock,
+                    })}
                     onAddToWishlist={() => console.log('Add to wishlist:', product._id)}
                   />
                 </AnimatedSection>
