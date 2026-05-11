@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { 
   ShoppingCart, 
@@ -13,10 +13,12 @@ import {
   Star,
   Minus,
   Plus,
-  Loader2
+  Loader2,
+  Check
 } from 'lucide-react';
 import { Container, Section, Heading, Text, Button } from '../../components/ui';
 import { useProduct } from '../../hooks/useProducts';
+import { useCart } from '../../context/CartContext';
 
 const Breadcrumb = styled.nav`
   padding: ${({ theme }) => theme.spacing[4]} 0;
@@ -295,9 +297,15 @@ const ActionButtons = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing[8]};
 `;
 
-const AddToCartButton = styled(Button)`
+const AddToCartButton = styled(Button)<{ $added?: boolean }>`
   flex: 1;
   padding: ${({ theme }) => theme.spacing[4]};
+  background: ${({ theme, $added }) => $added ? theme.colors.success[500] : theme.colors.secondary[500]};
+  transition: all 0.3s ease;
+  
+  &:not(:disabled):hover {
+    background: ${({ theme, $added }) => $added ? theme.colors.success[600] : theme.colors.secondary[600]};
+  }
 `;
 
 const IconActionButton = styled.button`
@@ -369,9 +377,28 @@ const ErrorWrapper = styled.div`
 
 export function ProductDetailPage() {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const { product, loading, error } = useProduct(productId || '');
+  const { addItem, isInCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!product || product.stock <= 0) return;
+    
+    addItem({
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0] || '',
+      stock: product.stock,
+      quantity,
+    });
+    
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
+  };
 
   if (loading) {
     return (
@@ -566,10 +593,20 @@ export function ProductDetailPage() {
                 $variant="primary" 
                 $size="lg"
                 disabled={!inStock}
-                onClick={() => console.log('Add to cart:', product._id, quantity)}
+                onClick={handleAddToCart}
+                $added={addedToCart}
               >
-                <ShoppingCart size={20} />
-                {inStock ? 'Añadir al carrito' : 'No disponible'}
+                {addedToCart ? (
+                  <>
+                    <Check size={20} />
+                    ¡Agregado!
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart size={20} />
+                    {inStock ? 'Añadir al carrito' : 'No disponible'}
+                  </>
+                )}
               </AddToCartButton>
               <IconActionButton onClick={() => console.log('Add to wishlist:', product._id)}>
                 <Heart size={24} />

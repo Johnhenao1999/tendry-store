@@ -190,6 +190,29 @@ class ApiService {
     });
   }
 
+  async createPublicOrder(data: {
+    items: { productId: string; quantity: number }[];
+    customer: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone: string;
+    };
+    shippingAddress: {
+      department: string;
+      city: string;
+      address: string;
+      postalCode?: string;
+    };
+    paymentMethod: string;
+    notes?: string;
+  }) {
+    return this.request<any>('/orders/public', {
+      method: 'POST',
+      body: data,
+    });
+  }
+
   async updateOrderStatus(id: string, data: { status?: string; paymentStatus?: string }) {
     return this.request<any>(`/orders/${id}/status`, {
       method: 'PUT',

@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Search, ShoppingCart, Menu, X, User } from 'lucide-react';
 import { Container, IconButton, CountBadge } from '../ui';
+import { useCart } from '../../context/CartContext';
 import logoTendry from '../../assets/images/logo-tendry.jpeg';
 
 const HeaderWrapper = styled.header`
@@ -195,7 +196,8 @@ const navItems = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const cartItemsCount = 3; // This would come from your cart state
+  const navigate = useNavigate();
+  const { itemCount } = useCart();
 
   return (
     <HeaderWrapper>
@@ -230,9 +232,9 @@ export function Header() {
               <User size={22} />
             </IconButton>
 
-            <CartButton aria-label="Carrito de compras">
+            <CartButton onClick={() => navigate('/carrito')} aria-label="Carrito de compras">
               <ShoppingCart size={22} />
-              {cartItemsCount > 0 && <CartBadge>{cartItemsCount}</CartBadge>}
+              {itemCount > 0 && <CartBadge>{itemCount}</CartBadge>}
             </CartButton>
 
             <MobileMenuButton 

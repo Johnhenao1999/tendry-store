@@ -4,6 +4,7 @@ import { theme, GlobalStyles } from './design-system';
 import { Header, Footer } from './components/layout';
 import { HomePage, CategoriesPage, ProductsPage, ProductDetailPage } from './pages';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import AdminLayout from './components/admin/AdminLayout';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import LoginPage from './pages/Admin/Login/LoginPage';
@@ -11,6 +12,8 @@ import DashboardPage from './pages/Admin/Dashboard/DashboardPage';
 import AdminProductsPage from './pages/Admin/Products/ProductsPage';
 import AdminCategoriesPage from './pages/Admin/Categories/CategoriesPage';
 import OrdersPage from './pages/Admin/Orders/OrdersPage';
+import CartPage from './pages/Cart/CartPage';
+import CheckoutPage from './pages/Checkout/CheckoutPage';
 
 // Layout component that wraps all pages with Header and Footer
 function RootLayout() {
@@ -54,6 +57,14 @@ const router = createBrowserRouter([
       {
         path: 'ofertas',
         element: <ProductsPage />,
+      },
+      {
+        path: 'carrito',
+        element: <CartPage />,
+      },
+      {
+        path: 'checkout',
+        element: <CheckoutPage />,
       },
       {
         path: 'contacto',
@@ -107,7 +118,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <AuthProvider>
-        <RouterProvider router={router} />
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );

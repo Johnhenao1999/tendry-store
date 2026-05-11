@@ -12,13 +12,32 @@ import {
   XCircle,
   Clock,
   Filter,
+  Phone,
+  MapPin,
+  CreditCard,
 } from 'lucide-react';
 import api from '../../../services/api';
+
+interface Customer {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+}
+
+interface ShippingAddress {
+  department: string;
+  city: string;
+  address: string;
+  postalCode?: string;
+  country: string;
+}
 
 interface Order {
   _id: string;
   orderNumber: string;
-  user: { _id: string; name: string; email: string };
+  user?: { _id: string; name: string; email: string };
+  customer?: Customer;
   items: Array<{
     product: string;
     name: string;
@@ -33,13 +52,7 @@ interface Order {
   status: string;
   paymentStatus: string;
   paymentMethod: string;
-  shippingAddress: {
-    street: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
+  shippingAddress: ShippingAddress;
   notes?: string;
   createdAt: string;
 }
@@ -147,6 +160,31 @@ const OrdersPage: React.FC = () => {
     return configs[status] || { label: status, color: '#6b7280' };
   };
 
+  const getPaymentMethodLabel = (method: string) => {
+    const labels: Record<string, string> = {
+      nequi: 'Nequi',
+      daviplata: 'Daviplata',
+      bancolombia: 'Bancolombia',
+      cash_on_delivery: 'Contra entrega',
+    };
+    return labels[method] || method;
+  };
+
+  const getCustomerName = (order: Order) => {
+    if (order.customer) {
+      return `${order.customer.firstName} ${order.customer.lastName}`;
+    }
+    return order.user?.name || 'N/A';
+  };
+
+  const getCustomerEmail = (order: Order) => {
+    return order.customer?.email || order.user?.email || '';
+  };
+
+  const getCustomerPhone = (order: Order) => {
+    return order.customer?.phone || '';
+  };
+
   const statusOptions = [
     { value: '', label: 'Todos' },
     { value: 'pending', label: 'Pendiente' },
@@ -215,8 +253,8 @@ const OrdersPage: React.FC = () => {
                         <OrderItems>{order.items.length} artículo(s)</OrderItems>
                       </Td>
                       <Td>
-                        <CustomerName>{order.user?.name || 'N/A'}</CustomerName>
-                        <CustomerEmail>{order.user?.email || ''}</CustomerEmail>
+                        <CustomerName>{getCustomerName(order)}</CustomerName>
+                        <CustomerEmail>{getCustomerEmail(order)}</CustomerEmail>
                       </Td>
                       <Td>
                         <OrderTotal>{formatCurrency(order.total)}</OrderTotal>
@@ -357,16 +395,27 @@ const OrdersPage: React.FC = () => {
               </Section>
 
               <Section>
-                <SectionTitle>Dirección de Envío</SectionTitle>
+                <SectionTitle>
+                  <MapPin size={18} />
+                  Dirección de Envío
+                </SectionTitle>
                 <AddressCard>
-                  <p>{selectedOrder.shippingAddress.street}</p>
+                  <p><strong>{selectedOrder.shippingAddress.address}</strong></p>
                   <p>
-                    {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state}
+                    {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.department}
                   </p>
-                  <p>
-                    {selectedOrder.shippingAddress.postalCode}, {selectedOrder.shippingAddress.country}
-                  </p>
+                  <p>{selectedOrder.shippingAddress.country}</p>
                 </AddressCard>
+              </Section>
+
+              <Section>
+                <SectionTitle>
+                  <CreditCard size={18} />
+                  Método de Pago
+                </SectionTitle>
+                <PaymentMethodCard>
+                  {getPaymentMethodLabel(selectedOrder.paymentMethod)}
+                </PaymentMethodCard>
               </Section>
 
               {selectedOrder.notes && (
@@ -379,8 +428,14 @@ const OrdersPage: React.FC = () => {
               <Section>
                 <SectionTitle>Cliente</SectionTitle>
                 <CustomerCard>
-                  <CustomerDetailName>{selectedOrder.user?.name}</CustomerDetailName>
-                  <CustomerDetailEmail>{selectedOrder.user?.email}</CustomerDetailEmail>
+                  <CustomerDetailName>{getCustomerName(selectedOrder)}</CustomerDetailName>
+                  <CustomerDetailEmail>{getCustomerEmail(selectedOrder)}</CustomerDetailEmail>
+                  {getCustomerPhone(selectedOrder) && (
+                    <CustomerDetailPhone>
+                      <Phone size={14} />
+                      {getCustomerPhone(selectedOrder)}
+                    </CustomerDetailPhone>
+                  )}
                 </CustomerCard>
               </Section>
             </ModalContent>
@@ -677,6 +732,9 @@ const Section = styled.div`
 `;
 
 const SectionTitle = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[2]};
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
@@ -808,6 +866,23 @@ const CustomerDetailName = styled.div`
 const CustomerDetailEmail = styled.div`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.neutral[500]};
+`;
+
+const CustomerDetailPhone = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[2]};
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.neutral[500]};
+  margin-top: ${({ theme }) => theme.spacing[1]};
+`;
+
+const PaymentMethodCard = styled.div`
+  background: ${({ theme }) => theme.colors.neutral[50]};
+  border-radius: 10px;
+  padding: ${({ theme }) => theme.spacing[4]};
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.neutral[700]};
 `;
 
 export default OrdersPage;
