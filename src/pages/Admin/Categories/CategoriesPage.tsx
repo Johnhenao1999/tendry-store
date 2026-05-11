@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Plus, Edit2, Trash2, X, Save, FolderTree, Image } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Save, FolderTree } from 'lucide-react';
 import api from '../../../services/api';
+import { ImageUpload } from '../../../components/shared/ImageUpload';
 
 interface Category {
   _id: string;
@@ -201,20 +202,11 @@ const CategoriesPage: React.FC = () => {
               </FormGroup>
 
               <FormGroup>
-                <Label>Imagen (URL)</Label>
-                <ImageInputRow>
-                  <Image size={18} />
-                  <Input
-                    value={formData.image}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, image: e.target.value }))}
-                    placeholder="https://..."
-                  />
-                </ImageInputRow>
-                {formData.image && (
-                  <ImagePreview>
-                    <img src={formData.image} alt="Preview" />
-                  </ImagePreview>
-                )}
+                <Label>Imagen</Label>
+                <ImageUpload
+                  value={formData.image}
+                  onChange={(url) => setFormData((prev) => ({ ...prev, image: url }))}
+                />
               </FormGroup>
 
               <ModalFooter>
@@ -522,29 +514,6 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary[600]};
-  }
-`;
-
-const ImageInputRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing[2]};
-
-  svg {
-    color: ${({ theme }) => theme.colors.neutral[500]};
-    flex-shrink: 0;
-  }
-`;
-
-const ImagePreview = styled.div`
-  margin-top: ${({ theme }) => theme.spacing[4]};
-  border-radius: 8px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
   }
 `;
 

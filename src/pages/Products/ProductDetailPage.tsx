@@ -496,10 +496,10 @@ export function ProductDetailPage() {
             </Rating>
 
             <PriceSection>
-              <CurrentPrice>${product.price.toFixed(2)}</CurrentPrice>
+              <CurrentPrice>${product.price.toLocaleString('es-CO')} COP</CurrentPrice>
               {product.compareAtPrice && (
                 <>
-                  <OriginalPrice>${product.compareAtPrice.toFixed(2)}</OriginalPrice>
+                  <OriginalPrice>${product.compareAtPrice.toLocaleString('es-CO')} COP</OriginalPrice>
                   <Discount>-{discount}%</Discount>
                 </>
               )}
@@ -582,7 +582,7 @@ export function ProductDetailPage() {
             <Features>
               <Feature>
                 <Truck size={24} />
-                <span>Envío gratis +50€</span>
+                <span>Envío gratis +$100.000</span>
               </Feature>
               <Feature>
                 <Shield size={24} />

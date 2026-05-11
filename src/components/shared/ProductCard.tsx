@@ -347,8 +347,8 @@ export function ProductCard({
           <ProductCategory>{category}</ProductCategory>
           
           <PriceWrapper>
-            <AnimatedPrice $size="md">€{price.toFixed(2)}</AnimatedPrice>
-            {originalPrice && <OriginalPrice>€{originalPrice.toFixed(2)}</OriginalPrice>}
+            <AnimatedPrice $size="md">${price.toLocaleString('es-CO')} COP</AnimatedPrice>
+            {originalPrice && <OriginalPrice>${originalPrice.toLocaleString('es-CO')} COP</OriginalPrice>}
           </PriceWrapper>
         </ProductInfo>
       </Link>

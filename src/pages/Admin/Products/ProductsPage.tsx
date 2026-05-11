@@ -6,12 +6,12 @@ import {
   Edit2,
   Trash2,
   X,
-  Image,
   Save,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
 import api from '../../../services/api';
+import { ImageUpload } from '../../../components/shared/ImageUpload';
 
 interface Product {
   _id: string;
@@ -190,9 +190,11 @@ const ProductsPage: React.FC = () => {
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('es-ES', {
+    return new Intl.NumberFormat('es-CO', {
       style: 'currency',
-      currency: 'EUR',
+      currency: 'COP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(amount);
   };
 
@@ -411,24 +413,20 @@ const ProductsPage: React.FC = () => {
                 </FormGroup>
 
                 <FormGroup $full>
-                  <Label>Imágenes (URLs)</Label>
-                  {formData.images.map((img, index) => (
-                    <ImageInputRow key={index}>
-                      <Image size={18} />
-                      <Input
+                  <Label>Imágenes</Label>
+                  <ImagesGrid>
+                    {formData.images.map((img, index) => (
+                      <ImageUpload
+                        key={index}
                         value={img}
-                        onChange={(e) => updateImage(index, e.target.value)}
-                        placeholder="https://..."
+                        onChange={(url) => updateImage(index, url)}
+                        onRemove={() => removeImageField(index)}
+                        showRemove={formData.images.length > 1}
                       />
-                      {formData.images.length > 1 && (
-                        <RemoveImageButton type="button" onClick={() => removeImageField(index)}>
-                          <X size={16} />
-                        </RemoveImageButton>
-                      )}
-                    </ImageInputRow>
-                  ))}
+                    ))}
+                  </ImagesGrid>
                   <AddImageButton type="button" onClick={addImageField}>
-                    <Plus size={16} /> Agregar imagen
+                    <Plus size={16} /> Agregar otra imagen
                   </AddImageButton>
                 </FormGroup>
 
@@ -834,30 +832,11 @@ const Select = styled.select`
   }
 `;
 
-const ImageInputRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing[2]};
-  margin-bottom: ${({ theme }) => theme.spacing[2]};
-
-  svg {
-    color: ${({ theme }) => theme.colors.neutral[500]};
-    flex-shrink: 0;
-  }
-`;
-
-const RemoveImageButton = styled.button`
-  background: #fee2e2;
-  color: #dc2626;
-  border: none;
-  border-radius: 6px;
-  padding: ${({ theme }) => theme.spacing[1]};
-  cursor: pointer;
-  flex-shrink: 0;
-
-  &:hover {
-    background: #fecaca;
-  }
+const ImagesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: ${({ theme }) => theme.spacing[4]};
+  margin-bottom: ${({ theme }) => theme.spacing[3]};
 `;
 
 const AddImageButton = styled.button`
