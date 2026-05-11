@@ -34,7 +34,7 @@ export const uploadToCloudinary = async (file: File): Promise<CloudinaryUploadRe
   return response.json();
 };
 
-export const deleteFromCloudinary = async (publicId: string): Promise<void> => {
+export const deleteFromCloudinary = async (_publicId: string): Promise<void> => {
   // Note: Deletion requires server-side API secret
   // For now, we'll skip deletion or handle it through the backend
   console.warn('Cloudinary deletion requires server-side implementation');
