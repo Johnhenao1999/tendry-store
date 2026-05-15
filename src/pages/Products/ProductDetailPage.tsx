@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { 
   ShoppingCart, 
@@ -300,11 +300,11 @@ const ActionButtons = styled.div`
 const AddToCartButton = styled(Button)<{ $added?: boolean }>`
   flex: 1;
   padding: ${({ theme }) => theme.spacing[4]};
-  background: ${({ theme, $added }) => $added ? theme.colors.success[500] : theme.colors.secondary[500]};
+  background: ${({ theme, $added }) => $added ? theme.colors.success.main : theme.colors.secondary[500]};
   transition: all 0.3s ease;
   
   &:not(:disabled):hover {
-    background: ${({ theme, $added }) => $added ? theme.colors.success[600] : theme.colors.secondary[600]};
+    background: ${({ theme, $added }) => $added ? theme.colors.success.dark : theme.colors.secondary[600]};
   }
 `;
 
@@ -377,9 +377,8 @@ const ErrorWrapper = styled.div`
 
 export function ProductDetailPage() {
   const { productId } = useParams();
-  const navigate = useNavigate();
   const { product, loading, error } = useProduct(productId || '');
-  const { addItem, isInCart } = useCart();
+  const { addItem } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);

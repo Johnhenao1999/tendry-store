@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ArrowLeft, Check, Loader2, CreditCard, Banknote, Building2, ShoppingBag } from 'lucide-react';
 import { Container, Section, Heading, Text } from '../../components/ui';
@@ -36,7 +36,6 @@ const PAYMENT_METHODS = [
 ];
 
 export default function CheckoutPage() {
-  const navigate = useNavigate();
   const { items, subtotal, shipping, total, clearCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
