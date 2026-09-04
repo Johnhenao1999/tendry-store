@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
       <LoginCard>
         <Logo>
           <LogoIcon>T</LogoIcon>
-          <LogoText>TENDRYX</LogoText>
+          <LogoText>TENDRYX JOYERÍA</LogoText>
         </Logo>
         <Title>Panel de Administración</Title>
         <Subtitle>Inicia sesión para continuar</Subtitle>
@@ -227,7 +227,7 @@ const SubmitButton = styled.button`
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(15, 28, 46, 0.3);
+    box-shadow: 0 8px 20px rgba(216, 154, 51, 0.28);
   }
 
   &:disabled {

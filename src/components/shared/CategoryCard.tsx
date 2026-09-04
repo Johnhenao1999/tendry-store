@@ -37,9 +37,9 @@ const CategoryCardWrapper = styled(Link)`
     .category-overlay {
       background: linear-gradient(
         to top,
-        rgba(10, 18, 25, 0.95) 0%,
-        rgba(10, 18, 25, 0.7) 50%,
-        rgba(10, 18, 25, 0.3) 100%
+        rgba(6, 5, 5, 0.96) 0%,
+        rgba(6, 5, 5, 0.72) 50%,
+        rgba(6, 5, 5, 0.28) 100%
       );
     }
     
@@ -87,9 +87,9 @@ const CategoryOverlay = styled.div`
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(10, 18, 25, 0.9) 0%,
-    rgba(10, 18, 25, 0.5) 50%,
-    rgba(10, 18, 25, 0.1) 100%
+    rgba(6, 5, 5, 0.9) 0%,
+    rgba(6, 5, 5, 0.5) 50%,
+    rgba(6, 5, 5, 0.1) 100%
   );
   transition: background 0.4s ease;
 `;
@@ -138,7 +138,7 @@ const ArrowButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(212, 168, 67, 0.2);
+  background: rgba(216, 154, 51, 0.22);
   border-radius: ${({ theme }) => theme.borderRadius.full};
   color: ${({ theme }) => theme.colors.secondary[500]};
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);

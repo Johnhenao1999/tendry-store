@@ -408,7 +408,7 @@ const ProductsPage: React.FC = () => {
                   <Input
                     value={formData.tags}
                     onChange={(e) => setFormData((prev) => ({ ...prev, tags: e.target.value }))}
-                    placeholder="perfume, floral, mujer"
+                    placeholder="anillo, pulsera, acero"
                   />
                 </FormGroup>
 

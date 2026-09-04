@@ -43,7 +43,7 @@ export function CategoriesPage() {
             Nuestras <GradientText>Categorías</GradientText>
           </Heading>
           <Text $color="secondary" $size="lg" $align="center" style={{ maxWidth: '600px', margin: '0 auto' }}>
-            Explora nuestra amplia selección de fragancias organizadas por categoría. 
+            Explora nuestra amplia selección de joyas organizadas por categoría.
             Encuentra exactamente lo que buscas.
           </Text>
         </Container>

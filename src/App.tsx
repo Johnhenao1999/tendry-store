@@ -68,7 +68,22 @@ const router = createBrowserRouter([
       },
       {
         path: 'contacto',
-        element: <div style={{ padding: '100px 20px', textAlign: 'center' }}>Contact Page (Coming Soon)</div>,
+        element: (
+          <section style={{ padding: '100px 20px', textAlign: 'center', maxWidth: '860px', margin: '0 auto' }}>
+            <h1 style={{ marginBottom: '16px' }}>Contacto Tendryx Joyería</h1>
+            <p style={{ marginBottom: '8px' }}>Dirección: Avenida Jesús Morante Borrás 232, España</p>
+            <p style={{ marginBottom: '8px' }}>Teléfono: +34 613 427 440</p>
+            <p style={{ marginBottom: '24px' }}>Realizamos envíos a toda España.</p>
+            <a
+              href="https://wa.me/34613427440"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#D4A843', fontWeight: 600 }}
+            >
+              Escribir por WhatsApp
+            </a>
+          </section>
+        ),
       },
       {
         path: '*',

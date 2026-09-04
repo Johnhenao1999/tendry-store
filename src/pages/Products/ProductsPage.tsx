@@ -239,7 +239,7 @@ export function ProductsPage() {
           <Text $color="secondary" $size="lg" $align="center" style={{ maxWidth: '600px', margin: '0 auto' }}>
             {categoryName 
               ? `Explora nuestra selección de ${categoryName.toLowerCase()}`
-              : 'Descubre nuestra colección completa de fragancias premium'
+              : 'Descubre nuestra colección completa de joyas premium'
             }
           </Text>
         </Container>

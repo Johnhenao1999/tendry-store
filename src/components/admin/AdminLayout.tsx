@@ -13,7 +13,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import logoTendry from '../../assets/images/logo-tendry.jpeg';
+import logoTendry from '../../assets/images/logo-tendryx.jpeg';
 
 const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -39,9 +39,9 @@ const AdminLayout: React.FC = () => {
         <SidebarHeader>
           <Logo>
             <LogoIcon>
-              <img src={logoTendry} alt="Tendry Logo" />
+              <img src={logoTendry} alt="Logo Tendryx Joyería" />
             </LogoIcon>
-            {sidebarOpen && <LogoText>TENDRYX</LogoText>}
+            {sidebarOpen && <LogoText>TENDRYX JOYERÍA</LogoText>}
           </Logo>
         </SidebarHeader>
 

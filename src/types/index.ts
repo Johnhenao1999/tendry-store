@@ -21,11 +21,11 @@ export interface Product {
 }
 
 export type ProductCategory = 
-  | 'esencias-clasico'
-  | 'frascos-30ml'
-  | 'presentacion-lujo'
-  | 'calidad-1-1'
-  | '100-originales';
+  | 'anillos'
+  | 'pulseras'
+  | 'sets-regalo'
+  | 'novedades'
+  | 'piezas-exclusivas';
 
 export interface Category {
   id: ProductCategory;

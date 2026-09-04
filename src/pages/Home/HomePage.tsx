@@ -5,6 +5,7 @@ import { Container, Section, Button, Heading, Text, Grid, GradientText } from '.
 import { ProductCard, CategoryCard, AnimatedSection } from '../../components/shared';
 import { useFeaturedProducts, useCategories } from '../../hooks/useProducts';
 import { useCart } from '../../context/CartContext';
+import heroBraceletGold from '../../assets/images/hero-pulsera.png';
 
 // Animations
 const fadeInUp = keyframes`
@@ -40,10 +41,10 @@ const float = keyframes`
 
 const glow = keyframes`
   0%, 100% {
-    box-shadow: 0 0 20px rgba(212, 168, 67, 0.2);
+    box-shadow: 0 0 20px rgba(216, 154, 51, 0.24);
   }
   50% {
-    box-shadow: 0 0 40px rgba(212, 168, 67, 0.4);
+    box-shadow: 0 0 40px rgba(216, 154, 51, 0.44);
   }
 `;
 
@@ -56,7 +57,7 @@ const HeroSection = styled.section`
   background: linear-gradient(
     135deg,
     ${({ theme }) => theme.colors.primary[900]} 0%,
-    ${({ theme }) => theme.colors.primary[800]} 50%,
+    ${({ theme }) => theme.colors.primary[800]} 48%,
     ${({ theme }) => theme.colors.primary[700]} 100%
   );
   overflow: hidden;
@@ -70,9 +71,25 @@ const HeroSection = styled.section`
     height: 150%;
     background: radial-gradient(
       circle,
-      rgba(212, 168, 67, 0.1) 0%,
+      rgba(216, 154, 51, 0.12) 0%,
       transparent 70%
     );
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -12%;
+    bottom: -28%;
+    width: 64%;
+    height: 70%;
+    background: radial-gradient(
+      ellipse,
+      rgba(255, 247, 226, 0.14) 0%,
+      rgba(216, 154, 51, 0.08) 38%,
+      transparent 72%
+    );
+    pointer-events: none;
   }
 `;
 
@@ -87,8 +104,8 @@ const HeroSubtitle = styled(Text)`
   align-items: center;
   gap: ${({ theme }) => theme.spacing[2]};
   padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[4]}`};
-  background: rgba(212, 168, 67, 0.1);
-  border: 1px solid rgba(212, 168, 67, 0.3);
+  background: rgba(216, 154, 51, 0.12);
+  border: 1px solid rgba(216, 154, 51, 0.34);
   border-radius: ${({ theme }) => theme.borderRadius.full};
   margin-bottom: ${({ theme }) => theme.spacing[6]};
   animation: ${fadeInUp} 0.6s ease-out 0.2s backwards;
@@ -131,11 +148,27 @@ const HeroImage = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(255, 247, 226, 0.36), rgba(216, 154, 51, 0.34));
+    filter: blur(14px);
+    z-index: -1;
+    opacity: 0.9;
+  }
   
   img {
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 24px;
+    border: 1px solid rgba(245, 218, 155, 0.45);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35), 0 0 26px rgba(216, 154, 51, 0.25);
+    filter: sepia(0.18) saturate(1.2) contrast(1.06) brightness(1.03);
     animation: ${float} 4s ease-in-out infinite;
   }
 `;
@@ -265,12 +298,12 @@ const features = [
   {
     icon: <Sparkles size={28} />,
     title: 'Calidad Premium',
-    description: 'Fragancias seleccionadas con los más altos estándares de calidad.',
+    description: 'Joyas cuidadosamente seleccionadas con acabados premium y detalle artesanal.',
   },
   {
     icon: <Truck size={28} />,
     title: 'Envío Rápido',
-    description: 'Entrega en 24-48h en península. Envíos a toda Europa.',
+    description: 'Entrega en 24-48h en península. Envíos a toda España.',
   },
   {
     icon: <Shield size={28} />,
@@ -301,12 +334,12 @@ export function HomePage() {
             </HeroSubtitle>
             
             <HeroTitle as="h1" $size="5xl">
-              Descubre tu <GradientText>fragancia</GradientText> perfecta
+              Descubre tu <GradientText>joya</GradientText> perfecta
             </HeroTitle>
             
             <HeroDescription $color="secondary">
-              Explora nuestra exclusiva colección de perfumes y esencias. 
-              Desde clásicos atemporales hasta las últimas tendencias en fragancias de lujo.
+              Explora nuestra colección de anillos y pulseras para cada estilo.
+              Diseños elegantes, piezas exclusivas y detalles que elevan tu look diario.
             </HeroDescription>
             
             <HeroButtons>
@@ -323,8 +356,8 @@ export function HomePage() {
         
         <HeroImage>
           <img 
-            src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&h=600&fit=crop" 
-            alt="Perfume destacado"
+            src={heroBraceletGold}
+            alt="Pulsera dorada en la mano"
           />
         </HeroImage>
       </HeroSection>
@@ -392,7 +425,7 @@ export function HomePage() {
       </Section>
 
       {/* Featured Products Section */}
-      <Section $padding="lg" style={{ background: 'rgba(15, 28, 46, 0.5)' }}>
+      <Section $padding="lg" style={{ background: 'rgba(6, 5, 5, 0.45)' }}>
         <Container>
           <AnimatedSection animation="fadeInUp">
             <SectionHeader>
@@ -457,11 +490,11 @@ export function HomePage() {
               ¿Tienes alguna pregunta?
             </Heading>
             <Text $color="secondary" $align="center" $size="lg" style={{ marginBottom: '32px' }}>
-              Contáctanos por WhatsApp y te ayudaremos a encontrar la fragancia perfecta para ti.
+              Contáctanos por WhatsApp y te ayudaremos a elegir la joya ideal para ti.
             </Text>
             <Button
               as="a"
-              href="https://wa.me/34611242280"
+              href="https://wa.me/34613427440"
               target="_blank"
               rel="noopener noreferrer"
               $variant="primary"

@@ -20,7 +20,10 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
     line-height: ${({ theme }) => theme.typography.lineHeight.normal};
     color: ${({ theme }) => theme.colors.neutral.white};
-    background-color: ${({ theme }) => theme.colors.primary[800]};
+    background:
+      radial-gradient(circle at 12% 4%, rgba(255, 247, 226, 0.22) 0%, rgba(255, 247, 226, 0) 28%),
+      radial-gradient(circle at 85% 10%, rgba(216, 154, 51, 0.18) 0%, rgba(216, 154, 51, 0) 24%),
+      linear-gradient(155deg, ${({ theme }) => theme.colors.primary[700]} 0%, ${({ theme }) => theme.colors.primary[800]} 56%, ${({ theme }) => theme.colors.primary[900]} 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;

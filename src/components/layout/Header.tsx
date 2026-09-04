@@ -4,15 +4,15 @@ import styled from 'styled-components';
 import { Search, ShoppingCart, Menu, X, User } from 'lucide-react';
 import { Container, IconButton, CountBadge } from '../ui';
 import { useCart } from '../../context/CartContext';
-import logoTendry from '../../assets/images/logo-tendry.jpeg';
+import logoTendry from '../../assets/images/logo-tendryx.jpeg';
 
 const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
   z-index: ${({ theme }) => theme.zIndex.sticky};
-  background: rgba(15, 28, 46, 0.95);
+  background: rgba(255, 250, 242, 0.96);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary[600]};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.secondary[200]};
 `;
 
 const HeaderContent = styled.div`
@@ -29,7 +29,7 @@ const Logo = styled(Link)`
   font-family: ${({ theme }) => theme.typography.fontFamily.secondary};
   font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.neutral.white};
+  color: ${({ theme }) => theme.colors.primary[900]};
   letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   
   span {
@@ -77,10 +77,10 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
       top: 72px;
       left: 0;
       right: 0;
-      background: rgba(15, 28, 46, 0.98);
+      background: rgba(255, 250, 242, 0.98);
       padding: 24px;
       gap: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(166, 103, 22, 0.2);
     `}
   }
 `;
@@ -88,7 +88,7 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
 const NavLink = styled(Link)<{ $active?: boolean }>`
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: ${({ theme, $active }) => $active ? theme.colors.secondary[500] : theme.colors.neutral[200]};
+  color: ${({ theme, $active }) => $active ? theme.colors.secondary[700] : theme.colors.primary[800]};
   text-decoration: none;
   transition: color ${({ theme }) => theme.transitions.fast};
   position: relative;
@@ -128,7 +128,7 @@ const CartButton = styled.button`
   height: 40px;
   background: transparent;
   border: none;
-  color: ${({ theme }) => theme.colors.neutral.white};
+  color: ${({ theme }) => theme.colors.primary[800]};
   cursor: pointer;
   transition: color ${({ theme }) => theme.transitions.fast};
   
@@ -144,8 +144,24 @@ const CartBadge = styled(CountBadge)`
 `;
 
 const MobileMenuButton = styled(IconButton)`
+  color: ${({ theme }) => theme.colors.primary[800]};
+
+  &:hover {
+    background: rgba(166, 103, 22, 0.08);
+    color: ${({ theme }) => theme.colors.secondary[700]};
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
+  }
+`;
+
+const UserButton = styled(IconButton)`
+  color: ${({ theme }) => theme.colors.primary[800]};
+
+  &:hover {
+    background: rgba(166, 103, 22, 0.08);
+    color: ${({ theme }) => theme.colors.secondary[700]};
   }
 `;
 
@@ -162,14 +178,14 @@ const SearchBar = styled.div`
   input {
     width: 100%;
     padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[4]} ${theme.spacing[2]} ${theme.spacing[10]}`};
-    background: ${({ theme }) => theme.colors.primary[700]};
-    border: 1px solid ${({ theme }) => theme.colors.primary[500]};
+    background: ${({ theme }) => theme.colors.neutral.white};
+    border: 1px solid ${({ theme }) => theme.colors.secondary[200]};
     border-radius: ${({ theme }) => theme.borderRadius.full};
-    color: ${({ theme }) => theme.colors.neutral.white};
+    color: ${({ theme }) => theme.colors.primary[900]};
     font-size: ${({ theme }) => theme.typography.fontSize.sm};
     
     &::placeholder {
-      color: ${({ theme }) => theme.colors.neutral[400]};
+      color: ${({ theme }) => theme.colors.neutral[500]};
     }
     
     &:focus {
@@ -181,14 +197,14 @@ const SearchBar = styled.div`
   svg {
     position: absolute;
     left: 12px;
-    color: ${({ theme }) => theme.colors.neutral[400]};
+    color: ${({ theme }) => theme.colors.neutral[500]};
   }
 `;
 
 const navItems = [
   { path: '/', label: 'Inicio' },
-  { path: '/categorias', label: 'Categorías' },
-  { path: '/productos', label: 'Productos' },
+  { path: '/categorias', label: 'Colecciones' },
+  { path: '/productos', label: 'Joyas' },
   { path: '/ofertas', label: 'Ofertas' },
   { path: '/contacto', label: 'Contacto' },
 ];
@@ -205,8 +221,9 @@ export function Header() {
         <HeaderContent>
           <Logo to="/">
             <LogoIcon>
-              <img src={logoTendry} alt="Tendry Logo" />
+              <img src={logoTendry} alt="Logo Tendryx Joyería" />
             </LogoIcon>
+            {/* <span>TENDRYX</span> */}
           </Logo>
 
           <Nav $isOpen={isMenuOpen}>
@@ -225,12 +242,12 @@ export function Header() {
           <Actions>
             <SearchBar>
               <Search size={18} />
-              <input type="text" placeholder="Buscar perfumes..." />
+              <input type="text" placeholder="Buscar anillos, pulseras..." />
             </SearchBar>
             
-            <IconButton aria-label="Mi cuenta">
+            <UserButton aria-label="Mi cuenta">
               <User size={22} />
-            </IconButton>
+            </UserButton>
 
             <CartButton onClick={() => navigate('/carrito')} aria-label="Carrito de compras">
               <ShoppingCart size={22} />

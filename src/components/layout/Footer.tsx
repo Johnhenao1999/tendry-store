@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Container, Text, Heading } from '../ui';
-import logoTendry from '../../assets/images/logo-tendry.jpeg';
+import logoTendry from '../../assets/images/logo-tendryx.jpeg';
 
 // Custom social icons (lucide-react doesn't include brand icons)
 const FacebookIcon = () => (
@@ -149,15 +149,15 @@ export function Footer() {
         <FooterContent>
           <BrandSection>
             <Logo to="/">
-              <LogoImage src={logoTendry} alt="Tendry Logo" />
+              <LogoImage src={logoTendry} alt="Logo Tendryx Joyería" />
             </Logo>
             <Text $size="sm" $color="secondary">
-              Tu destino premium para fragancias exclusivas. Descubre nuestra colección de 
-              esencias clásicas, presentaciones de lujo y perfumes de alta calidad.
+              Joyería Tendryx: elegancia en cada detalle. Descubre anillos y pulseras con diseño
+              sofisticado, acabados premium y envío a toda España.
             </Text>
             <SocialLinks>
               <SocialLink 
-                href="https://wa.me/34611242280" 
+                href="https://wa.me/34613427440" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -186,11 +186,11 @@ export function Footer() {
           <FooterSection>
             <FooterTitle as="h4">Categorías</FooterTitle>
             <FooterLinks>
-              <li><FooterLink to="/categorias/esencias-clasico">Esencias Clásico</FooterLink></li>
-              <li><FooterLink to="/categorias/frascos-30ml">Frascos 30ml</FooterLink></li>
-              <li><FooterLink to="/categorias/presentacion-lujo">Presentación Lujo</FooterLink></li>
-              <li><FooterLink to="/categorias/calidad-1-1">Calidad 1.1</FooterLink></li>
-              <li><FooterLink to="/categorias/100-originales">100% Originales</FooterLink></li>
+              <li><FooterLink to="/categorias/anillos">Anillos</FooterLink></li>
+              <li><FooterLink to="/categorias/pulseras">Pulseras</FooterLink></li>
+              <li><FooterLink to="/categorias/sets-regalo">Sets de regalo</FooterLink></li>
+              <li><FooterLink to="/categorias/novedades">Novedades</FooterLink></li>
+              <li><FooterLink to="/categorias/piezas-exclusivas">Piezas exclusivas</FooterLink></li>
             </FooterLinks>
           </FooterSection>
 
@@ -209,7 +209,7 @@ export function Footer() {
             <FooterTitle as="h4">Contacto</FooterTitle>
             <ContactItem>
               <Phone size={16} />
-              <span>+34 611 242 280</span>
+              <span>+34 613 427 440</span>
             </ContactItem>
             <ContactItem>
               <Mail size={16} />
@@ -217,7 +217,7 @@ export function Footer() {
             </ContactItem>
             <ContactItem>
               <MapPin size={16} />
-              <span>España</span>
+              <span>Avenida Jesús Morante Borrás 232 · España</span>
             </ContactItem>
           </FooterSection>
         </FooterContent>

@@ -186,7 +186,7 @@ const CategoriesPage: React.FC = () => {
                 <Input
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                  placeholder="Ej: Esencias Clásico"
+                  placeholder="Ej: Anillos Premium"
                   required
                 />
               </FormGroup>

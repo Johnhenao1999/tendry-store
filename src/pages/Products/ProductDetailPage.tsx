@@ -618,15 +618,15 @@ export function ProductDetailPage() {
             <Features>
               <Feature>
                 <Truck size={24} />
-                <span>Envío gratis +$100.000</span>
+                <span>Envíos a toda España</span>
               </Feature>
               <Feature>
                 <Shield size={24} />
-                <span>Garantía 30 días</span>
+                <span>Garantía de 30 días</span>
               </Feature>
               <Feature>
                 <RotateCcw size={24} />
-                <span>Devolución fácil</span>
+                <span>Cambios y devoluciones fáciles</span>
               </Feature>
             </Features>
           </ProductInfo>

@@ -1,33 +1,33 @@
-// Design System Tokens - TENDRYX Brand
-// Colores basados en la identidad visual de la marca
+// Design System Tokens - TENDRYX JOYERIA
+// Colores basados en la identidad visual de la marca de joyeria
 
 export const colors = {
-  // Primary - Azul Oscuro (fondo principal de la marca)
+  // Primary - Negro elegante con matices calidos
   primary: {
-    900: '#0A1219',
-    800: '#0F1C2E',
-    700: '#142536',
-    600: '#1A2942',
-    500: '#243550',
-    400: '#364761',
-    300: '#4A5B72',
-    200: '#6B7A8F',
-    100: '#9AA5B5',
-    50: '#D1D7DF',
+    900: '#1A1410',
+    800: '#241C16',
+    700: '#30251D',
+    600: '#3D2F23',
+    500: '#523F2E',
+    400: '#6A523C',
+    300: '#8A6D4F',
+    200: '#B18C66',
+    100: '#DAB48A',
+    50: '#F7E8D4',
   },
 
-  // Secondary - Dorado (acentos y elementos destacados)
+  // Secondary - Dorado joyeria
   secondary: {
-    900: '#705A0F',
-    800: '#8B7012',
-    700: '#A68516',
-    600: '#C9A227',
-    500: '#D4A843',
-    400: '#DDB85F',
-    300: '#E6C87B',
-    200: '#EFD99D',
-    100: '#F5E8C1',
-    50: '#FBF5E6',
+    900: '#6A4209',
+    800: '#85530F',
+    700: '#A56716',
+    600: '#C07E22',
+    500: '#D89A33',
+    400: '#E6B14F',
+    300: '#EFC775',
+    200: '#F5DA9B',
+    100: '#FAE9BE',
+    50: '#FFF7E2',
   },
 
   // Neutrals
@@ -153,8 +153,8 @@ export const shadows = {
   xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
   '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
-  gold: '0 4px 20px rgba(212, 168, 67, 0.3)',
-  glow: '0 0 20px rgba(212, 168, 67, 0.4)',
+  gold: '0 8px 26px rgba(216, 154, 51, 0.35)',
+  glow: '0 0 24px rgba(216, 154, 51, 0.45)',
 } as const;
 
 export const transitions = {

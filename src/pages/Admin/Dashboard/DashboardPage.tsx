@@ -65,11 +65,11 @@ const DashboardPage: React.FC = () => {
 
   const getStatusBadge = (status: string) => {
     const statusMap: Record<string, { label: string; color: string }> = {
-      pending: { label: 'Pendiente', color: '#f59e0b' },
-      confirmed: { label: 'Confirmado', color: '#3b82f6' },
-      processing: { label: 'Procesando', color: '#8b5cf6' },
-      shipped: { label: 'Enviado', color: '#06b6d4' },
-      delivered: { label: 'Entregado', color: '#10b981' },
+      pending: { label: 'Pendiente', color: '#D89A33' },
+      confirmed: { label: 'Confirmado', color: '#C07E22' },
+      processing: { label: 'Procesando', color: '#A56716' },
+      shipped: { label: 'Enviado', color: '#85530F' },
+      delivered: { label: 'Entregado', color: '#6A4209' },
       cancelled: { label: 'Cancelado', color: '#ef4444' },
     };
     return statusMap[status] || { label: status, color: '#6b7280' };
@@ -87,12 +87,12 @@ const DashboardPage: React.FC = () => {
     <Container>
       <PageHeader>
         <Title>Dashboard</Title>
-        <Subtitle>Bienvenido al panel de administración de TENDRYX</Subtitle>
+        <Subtitle>Bienvenido al panel de administración de TENDRYX Joyería</Subtitle>
       </PageHeader>
 
       <StatsGrid>
-        <StatCard $color="#3b82f6">
-          <StatIcon $color="#3b82f6">
+        <StatCard $color="#D89A33">
+          <StatIcon $color="#D89A33">
             <Package size={24} />
           </StatIcon>
           <StatContent>
@@ -101,8 +101,8 @@ const DashboardPage: React.FC = () => {
           </StatContent>
         </StatCard>
 
-        <StatCard $color="#8b5cf6">
-          <StatIcon $color="#8b5cf6">
+        <StatCard $color="#C07E22">
+          <StatIcon $color="#C07E22">
             <FolderTree size={24} />
           </StatIcon>
           <StatContent>
@@ -111,8 +111,8 @@ const DashboardPage: React.FC = () => {
           </StatContent>
         </StatCard>
 
-        <StatCard $color="#10b981">
-          <StatIcon $color="#10b981">
+        <StatCard $color="#A56716">
+          <StatIcon $color="#A56716">
             <ShoppingCart size={24} />
           </StatIcon>
           <StatContent>
@@ -121,8 +121,8 @@ const DashboardPage: React.FC = () => {
           </StatContent>
         </StatCard>
 
-        <StatCard $color="#f59e0b">
-          <StatIcon $color="#f59e0b">
+        <StatCard $color="#85530F">
+          <StatIcon $color="#85530F">
             <TrendingUp size={24} />
           </StatIcon>
           <StatContent>
@@ -178,7 +178,7 @@ const DashboardPage: React.FC = () => {
           </SectionHeader>
           <SummaryContent>
             <SummaryItem>
-              <SummaryIcon $color="#10b981">
+              <SummaryIcon $color="#A56716">
                 <DollarSign size={20} />
               </SummaryIcon>
               <SummaryText>
@@ -187,7 +187,7 @@ const DashboardPage: React.FC = () => {
               </SummaryText>
             </SummaryItem>
             <SummaryItem>
-              <SummaryIcon $color="#3b82f6">
+              <SummaryIcon $color="#C07E22">
                 <Users size={20} />
               </SummaryIcon>
               <SummaryText>
