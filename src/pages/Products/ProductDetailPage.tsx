@@ -382,6 +382,12 @@ export function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const formatPrice = (value: number) => new Intl.NumberFormat('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 
   const handleAddToCart = () => {
     if (!product || product.stock <= 0) return;
@@ -522,10 +528,10 @@ export function ProductDetailPage() {
             </Rating>
 
             <PriceSection>
-              <CurrentPrice>${product.price.toLocaleString('es-CO')} COP</CurrentPrice>
+              <CurrentPrice>{formatPrice(product.price)}</CurrentPrice>
               {product.compareAtPrice && (
                 <>
-                  <OriginalPrice>${product.compareAtPrice.toLocaleString('es-CO')} COP</OriginalPrice>
+                  <OriginalPrice>{formatPrice(product.compareAtPrice)}</OriginalPrice>
                   <Discount>-{discount}%</Discount>
                 </>
               )}

@@ -24,8 +24,8 @@ type CartAction =
   | { type: 'CLEAR_CART' }
   | { type: 'LOAD_CART'; payload: CartItem[] };
 
-const SHIPPING_THRESHOLD = 100000; // Envío gratis sobre 100,000 COP
-const SHIPPING_COST = 10000; // Costo de envío 10,000 COP
+const SHIPPING_THRESHOLD = 100; // Envío gratis sobre 100 EUR
+const SHIPPING_COST = 10; // Costo de envío 10 EUR
 
 const calculateTotals = (items: CartItem[]) => {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);

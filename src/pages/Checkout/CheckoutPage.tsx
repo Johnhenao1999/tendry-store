@@ -56,11 +56,11 @@ export default function CheckoutPage() {
   });
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('es-CO', {
+    return new Intl.NumberFormat('es-ES', {
       style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(price);
   };
 

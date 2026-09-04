@@ -309,6 +309,12 @@ export function ProductCard({
   onAddToWishlist,
 }: ProductCardProps) {
   const discount = originalPrice ? Math.round((1 - price / originalPrice) * 100) : 0;
+  const formatPrice = (value: number) => new Intl.NumberFormat('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 
   return (
     <ProductCardWrapper $variant="default" $padding="none" $hover>
@@ -347,8 +353,8 @@ export function ProductCard({
           <ProductCategory>{category}</ProductCategory>
           
           <PriceWrapper>
-            <AnimatedPrice $size="md">${price.toLocaleString('es-CO')} COP</AnimatedPrice>
-            {originalPrice && <OriginalPrice>${originalPrice.toLocaleString('es-CO')} COP</OriginalPrice>}
+            <AnimatedPrice $size="md">{formatPrice(price)}</AnimatedPrice>
+            {originalPrice && <OriginalPrice>{formatPrice(originalPrice)}</OriginalPrice>}
           </PriceWrapper>
         </ProductInfo>
       </Link>
